@@ -83,9 +83,9 @@ function Trackable(
 	t.translateY = function() {return ' translateY('+t.getFieldY()+'px)';};
 	t.rotateT =    function() {return     ' rotate('+t.getFieldT()+'deg)';};
 	
-	if(posXkey === null && t.pose === null) {t.X = function(){return null;}; t.translateX = function(){return '';};}
-	if(posYkey === null && t.pose === null) {t.Y = function(){return null;}; t.translateY = function(){return '';};}
-	if(posTkey === null && t.pose === null) {t.T = function(){return null;}; t.rotateT = function(){return '';};}
+	//if(posXkey === null && t.pose === null) {t.X = function(){return null;}; t.translateX = function(){return '';};}
+	//if(posYkey === null && t.pose === null) {t.Y = function(){return null;}; t.translateY = function(){return '';};}
+	//if(posTkey === null && t.pose === null) {t.T = function(){return null;}; t.rotateT = function(){return '';};}
 
 	t.log = o.log;
 	

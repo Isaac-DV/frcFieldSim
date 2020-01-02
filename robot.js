@@ -1,8 +1,3 @@
-var robot;
-var robotTraceAuto;
-var colors = 2.3;
-var colorIndex = 0;
-var scalingFactor = 1.75;
 function scale(elem, attribs) {
 	for(a of attribs) {
 //		console.log(elem,a)
@@ -19,8 +14,8 @@ function distLessThan(x, log = false) {
 }
 
 var robotOpts = {
-	width: 29.5,
-	height: 29.5 + 2.625,
+	width: 36.5,
+	height: 36.5,
 };
 
 var wheelOpts = {
@@ -30,14 +25,6 @@ var wheelOpts = {
 			convertAngleToField: function(x){return x;},
 			pose: null,
 			smoothing: false
-};
-
-function transformPose(Pose) {
-	return {
-		X: Pose.X * scalingFactor,
-		Y: (Pose.Y+162.0) * scalingFactor,
-		T: Pose.T + 90.0
-	};
 };
 
 $(function(){
@@ -111,6 +98,32 @@ $(function(){
 			scalar: scalingFactor,
 			transformPose: transformPose
 		});
+
+	function updateSpline() {
+		if (splines.length < 1)
+			return;
+		if (currentSpline === null)
+			return;
+		if (splineUpdateList.length < 1)
+			return;
+		if (splineT < 1.01) {
+			var point = splines[currentSplineIndex].getPoint(splineT);
+			splineTrackables[currentSplineIndex].update({
+				X: point.x,
+				Y: point.y,
+				T: 0
+			});
+			splineT += 0.01;
+		} else {
+			if (splineUpdateList.length > 0)
+				splineUpdateList.splice(0, 1);
+			if (splineUpdateList.length > 0) {
+				currentSplineIndex = splineUpdateList[0];
+				splineT = 0;
+			}
+		}
+	}
+	setInterval(updateSpline, 1);
 
 		
 	$(robot.elem).append('<div class="frant">frant</div>');

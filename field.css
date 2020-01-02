@@ -143,3 +143,78 @@ img.field {
     width: 640px;
     height: 480px;
 }
+
+.reset {
+    border-radius: 5px;
+    background-color: #05639e;
+    color: white;
+    border: none;
+    display: inline-block;
+}
+
+.reset:hover {
+    background-color: #4287f5;
+}
+
+.reset:active {
+    position: relative;
+    top: 1px;
+}
+
+.pointDescriptor {
+    height: 40px;
+    line-height: 40px;
+    background-color: black;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.pointText {
+    color: white;
+    display: inline-block;
+    margin: 0;
+    font-family: Verdana, Geneva, sans-serif;
+    margin-right: 5px;
+}
+
+.descriptorField {
+    border-radius: 10px;
+    border: 0px;
+    background-color: #595c61;
+    color: white;
+    font-family: Verdana, Geneva, sans-serif;
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.delete {
+    display: inline-block;
+    vertical-align: center;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    background-color: red;
+    margin-left: 5px;
+    height: 75%;
+    padding: 0px 10px 0px 10px;
+}
+
+.delete:hover {
+    background-color: white;
+    color: red;
+}
+
+.delete:active {
+    position: relative;
+    top: 1px;
+}
+
+.blueButton {
+    background-color: #5c39bd;
+}
+
+.blueButton:hover {
+    background-color: white; 
+    color: #5030ab;
+}
