@@ -175,7 +175,7 @@ function printMousePos(event) {
 
     var descriptor = document.createElement("div");
     descriptor.id = "descriptor" + splinePoints.length;
-    descriptor.className = "pointDescriptor";
+    descriptor.className = "pointDescriptor autocomplete";
     descriptor.style.width = document.getElementById("field").style.width;
     descriptor.onmouseenter = function() {
         descriptor.style.backgroundColor = "#302d2d";
@@ -193,11 +193,11 @@ function printMousePos(event) {
     descriptor.appendChild(xLabel);
     
     var xField = document.createElement("input");
-    xField.type = "number";
+    xField.type = "text";
     xField.name = "X";
     xField.value = getFieldX(event.clientX);
     xField.className = "descriptorField";
-    xField.oninput = function() {
+    xField.onchange = function() {
         updatePoint(point, yField, xField, tField, splinePoint, splineIndex, pointIndex, height, width);
     }
     descriptor.appendChild(xField);
@@ -282,7 +282,18 @@ function printMousePos(event) {
     }
     descriptor.appendChild(deleteButton);
 
-    
+    xField.updateFields = function(poseName) {
+        console.log("X field has changed, x field value is now " + poseName);
+        if (isInArray(Object.keys(fieldPoses), poseName)) {
+            var pose = fieldPoses[poseName];
+            xField.value = pose.translation.x;
+            yField.value = pose.translation.y;
+            tField.value = pose.rotation.getDegrees();
+            xField.onchange();
+        }
+    }
+
+    autocomplete(xField, Object.keys(fieldPoses));
 
     if (pointIndex === 1) {
         var pathName = document.createElement("input");

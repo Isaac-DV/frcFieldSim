@@ -14,7 +14,7 @@ function Rotation2d(degrees) {
         return Math.atan2(this.sin, this.cos);
     }
     this.getDegrees = function() {
-        return toDegrees(getRadians());
+        return toDegrees(this.getRadians());
     }
 
     this.rotateBy = function(other) {
@@ -34,6 +34,10 @@ function Translation2d(x, y) {
         return new Translation2d(this.x + other.x, this.y + other.y);
     }
 
+    this.rotateBy = function(rotation) {
+        return new Translation2d(this.x * rotation.cos - this.y * rotation.sin, x * rotation.sin + y * rotation.cos);
+    }
+
     this.inverse = function() {
         return new Translation2d(-this.x, -this.y);
     }
@@ -48,6 +52,7 @@ function Pose2d(translation, rotation) {
     this.rotation = rotation;
 
     this.transformBy = function(other) {
+        console.log("transforming");
         return new Pose2d(this.translation.translateBy(other.translation.rotateBy(this.rotation)),
             this.rotation.rotateBy(other.rotation));
     }
