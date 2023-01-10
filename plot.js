@@ -18,10 +18,14 @@ var scalingFactor = 1.75;
 
 var draggingPoint = false;
 
+const field = document.getElementById("field");
+const fieldHeight = field.offsetHeight;
+const fieldLength = field.offsetWidth;
+
 function transformPose(Pose) {
 	return {
 		X: Pose.X * scalingFactor,
-		Y: (Pose.Y+162.0) * scalingFactor,
+		Y: (fieldHeight - Pose.Y) * scalingFactor,
 		T: Pose.T + 90.0
 	};
 };
@@ -31,7 +35,7 @@ function getFieldX(pixelX) {
 }
 
 function getFieldY(pixelY) {
-    return (pixelY / scalingFactor) - 162;
+    return fieldHeight - (pixelY / scalingFactor);
 }
 
 function getPixelX(fieldX) {
@@ -39,7 +43,7 @@ function getPixelX(fieldX) {
 }
 
 function getPixelY(fieldY) {
-    return (fieldY + 162) * scalingFactor;
+    return (fieldHeight - fieldY) * scalingFactor;
 }
 
 function isInArray(array, item) {
@@ -142,9 +146,14 @@ function copyToClip(str) {
     document.removeEventListener("copy", listener);
 };
 
+function inRange(value, min, max) {
+    return min <= value && value <= max;
+}
+
 function printMousePos(event) {
-    if (getFieldX(event.clientX) > 648 || getFieldY(event.clientY) > 162)
+    if (!inRange(getFieldX(event.clientX), 0, fieldLength) || !inRange(getFieldY(event.clientY), 0, fieldHeight)) {
         return;
+    }
 
     if (draggingPoint) {
         draggingPoint = false;
