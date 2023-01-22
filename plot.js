@@ -26,7 +26,7 @@ function transformPose(Pose) {
 	return {
 		X: Pose.X * scalingFactor,
 		Y: (fieldHeight - Pose.Y) * scalingFactor,
-		T: Pose.T + 90.0
+		T: -Pose.T + 90.0
 	};
 };
 

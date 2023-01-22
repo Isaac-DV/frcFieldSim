@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 -m pynetworktables2js --robot 127.0.0.1 %*
+python3 -m pynetworktables2js --robot 10.83.23.2 %*
