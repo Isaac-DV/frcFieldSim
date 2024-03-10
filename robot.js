@@ -45,10 +45,10 @@ $(function(){
 			scalar: scalingFactor,
 			transformPose: transformPose,
 			log: function(){
-				console.log(NetworkTables.getValue(sd('Path Pose')));
+				console.log(NetworkTables.getValue(sd('Path Transmitter/Path Pose')));
 				},
 			smoothing: true,
-			pose: 'Path Pose'
+			pose: 'Path Transmitter/Path Pose'
 		});
 
 	pathTracer = new Traceable(
@@ -58,14 +58,14 @@ $(function(){
 			condition: distLessThan(64),
 //			color: function(){return rainbow(colors,colorIndex++);},
 //			color: function(){return rainbow(1.0,(2/3)*(1.0-NetworkTables.getValue(sd('Path Velocity'))));},
-			color: function(){return rainbow(1.0,(2/3)*(1.0-NetworkTables.getValue(sd('Path Pose'))[3]));},
+			color: function(){return rainbow(1.0,(2/3)*(1.0-NetworkTables.getValue(sd('Path Transmitter/Path Pose'))[3]));},
 			thiccness: 1
 		});
 	
 	robot = new Trackable(
 		'robot',null,null,null,
 		{
-			pose: 'Robot Pose',
+			pose: 'Swerve/Robot Pose',
 			width: robotOpts.width,
 			height: robotOpts.height,
 			scalar: scalingFactor,

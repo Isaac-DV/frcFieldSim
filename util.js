@@ -6,4 +6,4 @@ function toScaledFunction(f,scal) {
 	if(typeof(f)=="function") return function(){return scal*f();};
 	return function(){return scal*f;};
 }
-function sd(k) {return '/SmartDashboard/'+k}
+function sd(k) {return '/AdvantageKit/RealOutputs/'+k}
